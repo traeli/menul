@@ -1,0 +1,25 @@
+syntax = "v1"
+
+import (
+	"doc/user.api"
+	"doc/menu.api"
+)
+
+info (
+	title:  "menul"
+	desc:   "菜单小程序"
+	author: "trae"
+)
+
+service user-api {
+	// user 模块
+	@handler wxLogin
+	post /api/user/wxLogin (WxLoginReq) returns (WxLoginReply)
+
+	@handler editUser
+	post /api/user/editUser (EditUserReq) returns (EditUserReply)
+
+	@handler GetCurrentFood
+	get /api/currnt/food (GetCurrentFoodReq) returns (GetCurrentFoodReqReply)
+}
+

@@ -1,0 +1,36 @@
+syntax = "v1"
+
+info (
+   title:   "小程序用户登录接口"
+   desc:    "微信小程序通过 code 登录或注册"
+   author:  "trae"
+   email:   "trae.li"
+   version: "v1"
+)
+
+type (
+   WxLoginReq {
+      Code      string `json:"code" validate:"required" label:"微信临时登录Code"`
+      Nickname  string `json:"nickname,optional" label:"用户昵称"`
+      AvatarUrl string `json:"avatarUrl,optional" label:"头像URL"`
+      Gender    int    `json:"gender,optional" label:"性别 0未知 1男 2女"`
+   }
+
+   WxLoginReply {
+      Token  string `json:"token" label:"登录成功后返回的Token"`
+      UserId int64  `json:"userId" label:"用户ID"`
+      IsNew  bool   `json:"isNew" label:"是否是新注册"`
+   }
+   EditUserReq {
+     NickName string  `json:"nick_name" label:"昵称"`
+     Phone    string  `json:"phone" label:"手机"`
+     Gender   int     `json:"gender" label:"性别"`
+
+   }
+   EditUserReply{
+     Success bool  `json:"success" label:"成功"`
+   }
+
+)
+
+

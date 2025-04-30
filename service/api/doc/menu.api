@@ -1,0 +1,23 @@
+syntax = "v1"
+
+info (
+    title:   "小程序菜单相关接口"
+    desc:    "微信小程序菜单相关接口"
+    author:  "trae"
+    email:   "trae.li"
+    version: "v1"
+)
+
+type (
+    GetCurrentFoodReq {
+    }
+
+    GetCurrentFoodReqReply {
+        Food        string  `json:"token"   label:"登录成功后返回的Token"`
+        Desc        string  `json:"userId"  label:"用户ID"`
+        NearbyPrice float64 `json:"nearby_price" label:"附近的价格"`
+        Image       string  `json:"image"   label:"图片"`
+    }
+)
+
+
