@@ -26,7 +26,7 @@ func main() {
 
 	ctx := svc.NewServiceContext(c)
 	handler.RegisterHandlers(server, ctx)
-	cache.InitRedis(c.RedisCache[0].Host, c.RedisCache[0].Pass)
+	cache.InitRedis(c.RedisCache.Host, c.RedisCache.Pass)
 	defer cache.CloseRedis()
 	fmt.Printf("Starting server at %s:%d...\n", c.Host, c.Port)
 	server.Start()

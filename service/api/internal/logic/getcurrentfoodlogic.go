@@ -27,7 +27,7 @@ func (l *GetCurrentFoodLogic) GetCurrentFood(req *types.GetCurrentFoodReq) (resp
 	// todo: add your logic here and delete this line
 	resp = &types.GetCurrentFoodReqReply{}
 	resp.Food = "test食物"
-	resp.Image = "image"
+	resp.Image = "https://imgs.699pic.com/images/500/521/588.jpg!seo.v1"
 	resp.Desc = "很好吃"
 	resp.NearbyPrice = 23
 	return resp, nil

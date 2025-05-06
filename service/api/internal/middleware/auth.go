@@ -11,12 +11,12 @@ import (
 
 func Auth() rest.Middleware {
 	return func(next http.HandlerFunc) http.HandlerFunc {
+
 		return func(w http.ResponseWriter, r *http.Request) {
 			token := r.Header.Get("Authorization")
-			userID := r.Header.Get("user_id")
 
 			token = strings.TrimPrefix(token, "Bearer ")
-			isPass, err := ValidateToken(token, userID)
+			isPass, err := ValidateToken(token)
 			if err != nil {
 				httpx.Error(w, err)
 			}
@@ -30,14 +30,14 @@ func Auth() rest.Middleware {
 	}
 }
 
-func ValidateToken(token string, userID string) (bool, error) {
-	getToken, err := cache.GetToken(userID)
+func ValidateToken(token string) (bool, error) {
+	getUserId, err := cache.GetToken(token)
 	if err != nil {
 		return false, err
 	}
-	if getToken == token {
-		return true, nil
+	if getUserId == "" {
+		return false, nil
 	}
-	return false, nil
+	return true, nil
 
 }

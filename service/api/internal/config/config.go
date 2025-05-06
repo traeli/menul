@@ -1,13 +1,13 @@
 package config
 
 import (
-	"github.com/zeromicro/go-zero/core/stores/cache"
+	"github.com/zeromicro/go-zero/core/stores/redis"
 	"github.com/zeromicro/go-zero/rest"
 )
 
 type Config struct {
 	rest.RestConf
-	RedisCache cache.CacheConf
+	RedisCache redis.RedisConf `json:"RedisCache" yaml:"RedisCache"`
 
 	WxMiniApp struct {
 		AppId     string

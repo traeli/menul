@@ -7,8 +7,8 @@ type GetCurrentFoodReq struct {
 }
 
 type GetCurrentFoodReqReply struct {
-	Food        string  `json:"token"   label:"登录成功后返回的Token"`
-	Desc        string  `json:"userId"  label:"用户ID"`
+	Food        string  `json:"food"   label:"登录成功后返回的Token"`
+	Desc        string  `json:"desc"  label:"用户ID"`
 	NearbyPrice float64 `json:"nearby_price" label:"附近的价格"`
 	Image       string  `json:"image"   label:"图片"`
 }

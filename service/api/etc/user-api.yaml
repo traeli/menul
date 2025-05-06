@@ -7,7 +7,4 @@ WxMiniApp:
 Postgres:
   DataSource: "postgres://directus:directus@localhost:5432/directus?sslmode=disable"
 RedisCache:
-  RedisCache:
-  CACHE_ENABLED: true
-  CACHE_STORE: redis
-  Host: redis://redis:6379
+  Host: 127.0.0.1:6379  # 或 "redis"（如果是 Docker 容器名）

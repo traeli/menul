@@ -13,19 +13,23 @@ import (
 )
 
 func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
-	server.Use(middleware.Auth())
-	server.AddRoutes(
-		[]rest.Route{
-			{
-				Method:  http.MethodGet,
-				Path:    "/api/currnt/food",
-				Handler: GetCurrentFoodHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/api/user/wxLogin",
-				Handler: wxLoginHandler(serverCtx),
-			},
+	// 公开路由（不需要鉴权）
+	server.AddRoutes([]rest.Route{
+		{
+			Method:  http.MethodPost,
+			Path:    "/api/user/wxLogin",
+			Handler: wxLoginHandler(serverCtx), // 不加中间件
 		},
-	)
+	})
+
+	// 私有路由（需要鉴权）
+	server.AddRoutes([]rest.Route{
+		{
+			Method: http.MethodGet,
+			Path:   "/api/current/food",
+			Handler: middleware.Auth()( // <- 手动包裹 handler
+				GetCurrentFoodHandler(serverCtx),
+			),
+		},
+	})
 }

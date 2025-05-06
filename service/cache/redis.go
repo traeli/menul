@@ -14,10 +14,11 @@ var Rdb *redis.Client
 
 func InitRedis(Host, Pass string) {
 	Rdb = redis.NewClient(&redis.Options{
-		Addr:     Host,
-		Password: Pass,
-		DB:       1,
+		Addr: Host,
+		DB:   0,
 	})
+	fmt.Println("redis init success....", Host)
+
 }
 
 func CloseRedis() {
@@ -27,10 +28,12 @@ func CloseRedis() {
 	}
 }
 
-func GetToken(userID string) (string, error) {
-	token, err := Rdb.Get(context.Background(), fmt.Sprintf(UserTokenKey, userID)).Result()
+func GetToken(token string) (string, error) {
+	key := fmt.Sprintf(UserTokenKey, token)
+	fmt.Println("key------------------", key)
+	userID, err := Rdb.Get(context.Background(), key).Result()
 	if err != nil {
 		return "", err
 	}
-	return token, nil
+	return userID, nil
 }

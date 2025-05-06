@@ -11,6 +11,7 @@ import (
 	"gorm.io/gorm"
 	"menul-service/service/api/internal/svc"
 	"menul-service/service/api/internal/types"
+	"menul-service/service/cache"
 	"menul-service/service/model"
 	"net/http"
 	"time"
@@ -113,8 +114,8 @@ func (l *WxLoginLogic) generateToken(userId string) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	l.svcCtx.Redis.Set(context.Background(), userId, token, time.Hour*24)
-	return fmt.Sprintf("real-token-%s", userId), nil
+	l.svcCtx.Redis.Set(context.Background(), fmt.Sprintf(cache.UserTokenKey, token), userId, time.Hour*24)
+	return fmt.Sprintf(token), nil
 }
 
 func generateRandomToken() (string, error) {
