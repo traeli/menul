@@ -13,7 +13,7 @@ import (
 	"menul-service/service/cache"
 )
 
-var configFile = flag.String("f", "D:\\develop\\src\\menul-service\\service\\api\\etc\\user-api.yaml", "the config file")
+var configFile = flag.String("f", "./etc/user-api.yaml", "the config file")
 
 func main() {
 	flag.Parse()
