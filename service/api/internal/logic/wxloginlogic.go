@@ -75,7 +75,7 @@ func (l *WxLoginLogic) WxLogin(req *types.WxLoginReq) (resp *types.WxLoginReply,
 	fmt.Println("selectErr", selectErr)
 	if selectErr != nil && !errors.Is(selectErr, gorm.ErrRecordNotFound) {
 		l.Logger.Errorf("查询错误", selectErr.Error())
-		return nil, fmt.Errorf("查询用户失败: %v", err)
+		return nil, fmt.Errorf("查询用户失败: %v", selectErr)
 	}
 	isNew := false
 	if user == nil {
