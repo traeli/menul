@@ -32,7 +32,6 @@ func newUser(db *gorm.DB, opts ...gen.DOOption) user {
 	_user.UnionID = field.NewString(tableName, "union_id")
 	_user.Nickname = field.NewString(tableName, "nickname")
 	_user.AvatarURL = field.NewString(tableName, "avatar_url")
-	_user.Gender = field.NewInt32(tableName, "gender")
 	_user.Language = field.NewString(tableName, "language")
 	_user.Country = field.NewString(tableName, "country")
 	_user.CreateAt = field.NewTime(tableName, "create_at")
@@ -40,6 +39,7 @@ func newUser(db *gorm.DB, opts ...gen.DOOption) user {
 	_user.LoginIP = field.NewString(tableName, "login_ip")
 	_user.Phone = field.NewString(tableName, "phone")
 	_user.Status = field.NewInt32(tableName, "status")
+	_user.Gender = field.NewInt32(tableName, "gender")
 
 	_user.fillFieldMap()
 
@@ -55,7 +55,6 @@ type user struct {
 	UnionID   field.String
 	Nickname  field.String
 	AvatarURL field.String
-	Gender    field.Int32
 	Language  field.String
 	Country   field.String
 	CreateAt  field.Time
@@ -63,6 +62,7 @@ type user struct {
 	LoginIP   field.String
 	Phone     field.String
 	Status    field.Int32
+	Gender    field.Int32
 
 	fieldMap map[string]field.Expr
 }
@@ -84,7 +84,6 @@ func (u *user) updateTableName(table string) *user {
 	u.UnionID = field.NewString(table, "union_id")
 	u.Nickname = field.NewString(table, "nickname")
 	u.AvatarURL = field.NewString(table, "avatar_url")
-	u.Gender = field.NewInt32(table, "gender")
 	u.Language = field.NewString(table, "language")
 	u.Country = field.NewString(table, "country")
 	u.CreateAt = field.NewTime(table, "create_at")
@@ -92,6 +91,7 @@ func (u *user) updateTableName(table string) *user {
 	u.LoginIP = field.NewString(table, "login_ip")
 	u.Phone = field.NewString(table, "phone")
 	u.Status = field.NewInt32(table, "status")
+	u.Gender = field.NewInt32(table, "gender")
 
 	u.fillFieldMap()
 
@@ -122,7 +122,6 @@ func (u *user) fillFieldMap() {
 	u.fieldMap["union_id"] = u.UnionID
 	u.fieldMap["nickname"] = u.Nickname
 	u.fieldMap["avatar_url"] = u.AvatarURL
-	u.fieldMap["gender"] = u.Gender
 	u.fieldMap["language"] = u.Language
 	u.fieldMap["country"] = u.Country
 	u.fieldMap["create_at"] = u.CreateAt
@@ -130,6 +129,7 @@ func (u *user) fillFieldMap() {
 	u.fieldMap["login_ip"] = u.LoginIP
 	u.fieldMap["phone"] = u.Phone
 	u.fieldMap["status"] = u.Status
+	u.fieldMap["gender"] = u.Gender
 }
 
 func (u user) clone(db *gorm.DB) user {
