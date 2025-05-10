@@ -3,7 +3,7 @@ Host: 0.0.0.0
 Port: 8888
 WxMiniApp:
   AppId: "wx93f56eec335dada8"
-  AppSecret: "4d3686d8048909adbcef93ed685fc665"
+  AppSecret: "e9155bbbb96d676321b32d9cc43c29e7"
 Postgres:
   DataSource: "postgres://directus:directus@localhost:5432/directus?sslmode=disable"
 RedisCache:
