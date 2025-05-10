@@ -5,6 +5,7 @@ package handler
 
 import (
 	"menul-service/service/api/internal/middleware"
+	//"menul-service/service/api/internal/middleware"
 	"net/http"
 
 	"menul-service/service/api/internal/svc"
@@ -27,6 +28,7 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 		{
 			Method: http.MethodGet,
 			Path:   "/api/current/food",
+			//Handler: GetCurrentFoodHandler(serverCtx),
 			Handler: middleware.Auth()( // <- 手动包裹 handler
 				GetCurrentFoodHandler(serverCtx),
 			),

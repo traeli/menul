@@ -18,6 +18,7 @@ import (
 func Use(db *gorm.DB, opts ...gen.DOOption) *Query {
 	return &Query{
 		db:   db,
+		Food: newFood(db, opts...),
 		User: newUser(db, opts...),
 	}
 }
@@ -25,6 +26,7 @@ func Use(db *gorm.DB, opts ...gen.DOOption) *Query {
 type Query struct {
 	db *gorm.DB
 
+	Food food
 	User user
 }
 
@@ -33,6 +35,7 @@ func (q *Query) Available() bool { return q.db != nil }
 func (q *Query) clone(db *gorm.DB) *Query {
 	return &Query{
 		db:   db,
+		Food: q.Food.clone(db),
 		User: q.User.clone(db),
 	}
 }
@@ -48,16 +51,19 @@ func (q *Query) WriteDB() *Query {
 func (q *Query) ReplaceDB(db *gorm.DB) *Query {
 	return &Query{
 		db:   db,
+		Food: q.Food.replaceDB(db),
 		User: q.User.replaceDB(db),
 	}
 }
 
 type queryCtx struct {
+	Food *foodDo
 	User *userDo
 }
 
 func (q *Query) WithContext(ctx context.Context) *queryCtx {
 	return &queryCtx{
+		Food: q.Food.WithContext(ctx),
 		User: q.User.WithContext(ctx),
 	}
 }

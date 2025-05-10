@@ -7,6 +7,7 @@ import (
 	"menul-service/service/cache"
 	"net/http"
 	"strings"
+	"time"
 )
 
 func Auth() rest.Middleware {
@@ -39,5 +40,21 @@ func ValidateToken(token string) (bool, error) {
 		return false, nil
 	}
 	return true, nil
+
+}
+
+func GetTimePeriod(t time.Time) string {
+	hour := t.Hour()
+
+	switch {
+	case hour >= 5 && hour < 12:
+		return "breakfast"
+	case hour >= 12 && hour < 15:
+		return "lunch"
+	case hour >= 15 && hour < 18:
+		return "dinner"
+	default:
+		return "all"
+	}
 
 }

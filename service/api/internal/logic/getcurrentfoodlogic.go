@@ -2,9 +2,10 @@ package logic
 
 import (
 	"context"
-
+	"menul-service/service/api/internal/middleware"
 	"menul-service/service/api/internal/svc"
 	"menul-service/service/api/internal/types"
+	"time"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -24,11 +25,26 @@ func NewGetCurrentFoodLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Ge
 }
 
 func (l *GetCurrentFoodLogic) GetCurrentFood(req *types.GetCurrentFoodReq) (resp *types.GetCurrentFoodReqReply, err error) {
-	// todo: add your logic here and delete this line
 	resp = &types.GetCurrentFoodReqReply{}
-	resp.Food = "test食物"
-	resp.Image = "https://imgs.699pic.com/images/500/521/588.jpg!seo.v1"
-	resp.Desc = "很好吃"
-	resp.NearbyPrice = 23
+	table := l.svcCtx.FoodModel.Food
+
+	// 获取当前时间段
+	timePeriod := middleware.GetTimePeriod(time.Now())
+
+	food, selectErr := table.WithContext(l.ctx).
+		Where(table.TimePeriod.Eq(timePeriod)).
+		//Order(field.RawExpr("RANDOM()")).
+		Limit(1).
+		First()
+
+	if selectErr != nil {
+		return nil, selectErr
+	}
+
+	resp.Food = food.Name
+	resp.Image = food.Image
+	resp.Desc = food.Desc
+	resp.NearbyPrice = float64(food.Price)
+
 	return resp, nil
 }

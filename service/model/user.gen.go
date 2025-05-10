@@ -13,11 +13,10 @@ const TableNameUser = "user"
 // User mapped from table <user>
 type User struct {
 	ID        string    `gorm:"column:id;primaryKey" json:"id"`
-	OpenID    string    `gorm:"column:open_id;default:' '" json:"open_id"`
+	OpenID    string    `gorm:"column:open_id" json:"open_id"`
 	UnionID   string    `gorm:"column:union_id" json:"union_id"`
 	Nickname  string    `gorm:"column:nickname" json:"nickname"`
 	AvatarURL string    `gorm:"column:avatar_url" json:"avatar_url"`
-	Gender    int32     `gorm:"column:gender" json:"gender"`
 	Language  string    `gorm:"column:language" json:"language"`
 	Country   string    `gorm:"column:country" json:"country"`
 	CreateAt  time.Time `gorm:"column:create_at" json:"create_at"`
@@ -25,6 +24,7 @@ type User struct {
 	LoginIP   string    `gorm:"column:login_ip" json:"login_ip"`
 	Phone     string    `gorm:"column:phone" json:"phone"`
 	Status    int32     `gorm:"column:status" json:"status"`
+	Gender    int32     `gorm:"column:gender" json:"gender"`
 }
 
 // TableName User's table name

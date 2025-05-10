@@ -23,7 +23,9 @@ func main() {
 	g.UseDB(db)
 
 	user := g.GenerateModel("user")
-	g.ApplyBasic(user)
+	foods := g.GenerateModel("foods")
+
+	g.ApplyBasic(user, foods)
 
 	// 执行生成
 	g.Execute()

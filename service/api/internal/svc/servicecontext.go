@@ -13,6 +13,7 @@ import (
 type ServiceContext struct {
 	Config    config.Config
 	UserModel *dao.Query    // UserModel 是数据库模型
+	FoodModel *dao.Query    // FoodModel
 	DBEngin   *gorm.DB      // GORM 数据库连接
 	Redis     *redis.Client //redis
 }
@@ -41,6 +42,7 @@ func NewServiceContext(c config.Config) *ServiceContext {
 		Config:    c,
 		UserModel: dao.Use(db), // 初始化 UserModel
 		DBEngin:   db,
+		FoodModel: dao.Use(db),
 		Redis:     redisClient,
 	}
 }
