@@ -2,7 +2,7 @@ package logic
 
 import (
 	"context"
-	"gorm.io/gorm/clause"
+	"math/rand"
 	"menul-service/service/api/internal/middleware"
 	"menul-service/service/api/internal/svc"
 	"menul-service/service/api/internal/types"
@@ -29,16 +29,16 @@ func (l *GetCurrentFoodLogic) GetCurrentFood(req *types.GetCurrentFoodReq) (resp
 	resp = &types.GetCurrentFoodReqReply{}
 	table := l.svcCtx.FoodModel.Food
 
-	// 获取当前时间段
 	timePeriod := middleware.GetTimePeriod(time.Now())
+
+	offset := rand.Intn(10)
 
 	food, selectErr := table.WithContext(l.ctx).
 		Where(table.TimePeriod.Eq(timePeriod)).
-		Clauses(clause.OrderBy{
-			Expression: clause.Expr{SQL: "RANDOM()"},
-		}).
+		Offset(offset).
 		Limit(1).
 		First()
+
 	if selectErr != nil {
 		return nil, selectErr
 	}
