@@ -17,8 +17,8 @@ type GetCurrentFoodReq struct {
 }
 
 type GetCurrentFoodReqReply struct {
-	Food        string  `json:"token"   label:"食物名称"`
-	Desc        string  `json:"userId"  label:"描述"`
+	Food        string  `json:"food"   label:"食物名称"`
+	Desc        string  `json:"desc"  label:"描述"`
 	NearbyPrice float64 `json:"nearby_price" label:"附近的价格"`
 	Image       string  `json:"image"   label:"图片"`
 }
