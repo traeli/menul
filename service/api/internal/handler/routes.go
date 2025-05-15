@@ -4,7 +4,7 @@
 package handler
 
 import (
-	"menul-service/service/api/internal/middleware"
+	_ "menul-service/service/api/internal/middleware"
 	//"menul-service/service/api/internal/middleware"
 	"net/http"
 
@@ -22,16 +22,23 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			Handler: wxLoginHandler(serverCtx), // 不加中间件
 		},
 	})
+	server.AddRoutes([]rest.Route{
+		{
+			Method:  http.MethodPost,
+			Path:    "/api/food/list",
+			Handler: GetFoodListHandler(serverCtx),
+		},
+	})
 
 	// 私有路由（需要鉴权）
 	server.AddRoutes([]rest.Route{
 		{
-			Method: http.MethodGet,
-			Path:   "/api/current/food",
-			//Handler: GetCurrentFoodHandler(serverCtx),
-			Handler: middleware.Auth()( // <- 手动包裹 handler
-				GetCurrentFoodHandler(serverCtx),
-			),
+			Method:  http.MethodGet,
+			Path:    "/api/current/food",
+			Handler: GetCurrentFoodHandler(serverCtx),
+			//Handler: middleware.Auth()( // <- 手动包裹 handler
+			//	GetCurrentFoodHandler(serverCtx),
+			//),
 		},
 	})
 }

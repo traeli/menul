@@ -17,8 +17,26 @@ type GetCurrentFoodReq struct {
 }
 
 type GetCurrentFoodReqReply struct {
-	Food        string  `json:"token"   label:"登录成功后返回的Token"`
-	Desc        string  `json:"userId"  label:"用户ID"`
+	Food        string  `json:"token"   label:"食物名称"`
+	Desc        string  `json:"userId"  label:"描述"`
+	NearbyPrice float64 `json:"nearby_price" label:"附近的价格"`
+	Image       string  `json:"image"   label:"图片"`
+}
+
+type GetFoodListReq struct {
+	Page     int64  // 分页页码
+	PageSize int64  // 每页数量
+	Category string `json:"category label:"种类"`
+}
+
+type GetFoodListReqReply struct {
+	List  []GetFoodListReqReplyItem
+	Total int64
+}
+
+type GetFoodListReqReplyItem struct {
+	Food        string  `json:"token"   label:"食物名称"`
+	Desc        string  `json:"userId"  label:"描述"`
 	NearbyPrice float64 `json:"nearby_price" label:"附近的价格"`
 	Image       string  `json:"image"   label:"图片"`
 }

@@ -20,6 +20,11 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: GetCurrentFoodHandler(serverCtx),
 			},
 			{
+				Method:  http.MethodGet,
+				Path:    "/api/food/list",
+				Handler: GetFoodListHandler(serverCtx),
+			},
+			{
 				Method:  http.MethodPost,
 				Path:    "/api/user/editUser",
 				Handler: editUserHandler(serverCtx),

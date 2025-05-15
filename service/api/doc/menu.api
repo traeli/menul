@@ -13,11 +13,29 @@ type (
     }
 
     GetCurrentFoodReqReply {
-        Food        string  `json:"token"   label:"登录成功后返回的Token"`
-        Desc        string  `json:"userId"  label:"用户ID"`
+        Food        string  `json:"token"   label:"食物名称"`
+        Desc        string  `json:"userId"  label:"描述"`
         NearbyPrice float64 `json:"nearby_price" label:"附近的价格"`
         Image       string  `json:"image"   label:"图片"`
     }
 )
 
 
+type (
+    GetFoodListReq {
+       page     int64  // 分页页码
+       pageSize int64  // 每页数量
+       Category  string     `json:"category label:"种类"`
+    }
+    GetFoodListReqReply{
+        list []GetFoodListReqReplyItem
+        total int64
+    }
+
+    GetFoodListReqReplyItem {
+        Food        string  `json:"token"   label:"食物名称"`
+        Desc        string  `json:"userId"  label:"描述"`
+        NearbyPrice float64 `json:"nearby_price" label:"附近的价格"`
+        Image       string  `json:"image"   label:"图片"`
+    }
+)

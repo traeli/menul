@@ -3,12 +3,40 @@
 
 package types
 
+type EditUserReply struct {
+	Success bool `json:"success" label:"成功"`
+}
+
+type EditUserReq struct {
+	NickName string `json:"nick_name" label:"昵称"`
+	Phone    string `json:"phone" label:"手机"`
+	Gender   int    `json:"gender" label:"性别"`
+}
+
 type GetCurrentFoodReq struct {
 }
 
 type GetCurrentFoodReqReply struct {
-	Food        string  `json:"food"   label:"登录成功后返回的Token"`
-	Desc        string  `json:"desc"  label:"用户ID"`
+	Food        string  `json:"token"   label:"食物名称"`
+	Desc        string  `json:"userId"  label:"描述"`
+	NearbyPrice float64 `json:"nearby_price" label:"附近的价格"`
+	Image       string  `json:"image"   label:"图片"`
+}
+
+type GetFoodListReq struct {
+	Page     int64  `json:"page"`      // 分页页码
+	PageSize int64  `json:"page_size"` // 每页数量
+	Category string `json:"category"`
+}
+
+type GetFoodListReqReply struct {
+	List  []GetFoodListReqReplyItem
+	Total int64
+}
+
+type GetFoodListReqReplyItem struct {
+	Food        string  `json:"token"   label:"食物名称"`
+	Desc        string  `json:"userId"  label:"描述"`
 	NearbyPrice float64 `json:"nearby_price" label:"附近的价格"`
 	Image       string  `json:"image"   label:"图片"`
 }
@@ -24,14 +52,4 @@ type WxLoginReq struct {
 	Nickname  string `json:"nickname,optional" label:"用户昵称"`
 	AvatarUrl string `json:"avatarUrl,optional" label:"头像URL"`
 	Gender    int    `json:"gender,optional" label:"性别 0未知 1男 2女"`
-}
-
-type EditUserReply struct {
-	Success bool `json:"success" label:"成功"`
-}
-
-type EditUserReq struct {
-	NickName string `json:"nick_name" label:"昵称"`
-	Phone    string `json:"phone" label:"手机"`
-	Gender   int    `json:"gender" label:"性别"`
 }

@@ -21,5 +21,8 @@ service user-api {
 
 	@handler GetCurrentFood
 	get /api/currnt/food (GetCurrentFoodReq) returns (GetCurrentFoodReqReply)
+
+	@handler GetFoodList
+	get /api/food/list (GetFoodListReq) returns (GetFoodListReqReply)
 }
 
