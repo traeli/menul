@@ -10,7 +10,7 @@ info (
 
 type (
     GetCurrentFoodReq {
-        Food        string  `json:"food"   label:"食物名称"`
+        Food        string  `json:"food"`
     }
 
     GetCurrentFoodReqReply {

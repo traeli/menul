@@ -33,7 +33,7 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 	// 私有路由（需要鉴权）
 	server.AddRoutes([]rest.Route{
 		{
-			Method:  http.MethodGet,
+			Method:  http.MethodPost,
 			Path:    "/api/current/food",
 			Handler: GetCurrentFoodHandler(serverCtx),
 			//Handler: middleware.Auth()( // <- 手动包裹 handler
