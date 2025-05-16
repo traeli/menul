@@ -2,7 +2,6 @@ package logic
 
 import (
 	"context"
-	"fmt"
 	"math/rand"
 	"menul-service/service/api/internal/middleware"
 	"menul-service/service/api/internal/svc"
@@ -42,8 +41,8 @@ func (l *GetCurrentFoodLogic) GetCurrentFood(req *types.GetCurrentFoodReq) (resp
 		// 尝试查找一个匹配项
 		food, selectErr := query.First()
 		if selectErr != nil {
-			// 查询不到就返回提示
-			return nil, fmt.Errorf("查询结果为空")
+			resp.Food = "查询结果为空"
+			return resp, nil
 		}
 
 		resp.Food = food.Name
