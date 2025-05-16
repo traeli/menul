@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"fmt"
 	"math/rand"
 	"menul-service/service/api/internal/middleware"
 	"menul-service/service/api/internal/svc"
@@ -31,14 +32,30 @@ func (l *GetCurrentFoodLogic) GetCurrentFood(req *types.GetCurrentFoodReq) (resp
 
 	timePeriod := middleware.GetTimePeriod(time.Now())
 
+	// 查询对象初始化
+	query := table.WithContext(l.ctx).Where(table.TimePeriod.Eq(timePeriod))
+
+	// 如果有关键词，则按名称模糊查找
+	if req.Food != "" {
+		query = query.Where(table.Name.Like(req.Food))
+
+		// 尝试查找一个匹配项
+		food, selectErr := query.First()
+		if selectErr != nil {
+			// 查询不到就返回提示
+			return nil, fmt.Errorf("查询结果为空")
+		}
+
+		resp.Food = food.Name
+		resp.Image = food.Image
+		resp.Desc = food.Desc
+		resp.NearbyPrice = float64(food.Price)
+		return resp, nil
+	}
+
+	// 如果关键词为空，则随机查找
 	offset := rand.Intn(10)
-
-	food, selectErr := table.WithContext(l.ctx).
-		Where(table.TimePeriod.Eq(timePeriod)).
-		Offset(offset).
-		Limit(1).
-		First()
-
+	food, selectErr := query.Offset(offset).Limit(1).First()
 	if selectErr != nil {
 		return nil, selectErr
 	}

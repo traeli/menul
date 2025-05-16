@@ -14,6 +14,7 @@ type EditUserReq struct {
 }
 
 type GetCurrentFoodReq struct {
+	Food string `json:"food"   label:"食物名称"`
 }
 
 type GetCurrentFoodReqReply struct {
@@ -24,9 +25,9 @@ type GetCurrentFoodReqReply struct {
 }
 
 type GetFoodListReq struct {
-	Page     int64  `json:"page"`      // 分页页码
-	PageSize int64  `json:"page_size"` // 每页数量
-	Category string `json:"category"`
+	Page     int64  // 分页页码
+	PageSize int64  // 每页数量
+	Category string `json:"category label:"种类"`
 }
 
 type GetFoodListReqReply struct {
@@ -35,8 +36,8 @@ type GetFoodListReqReply struct {
 }
 
 type GetFoodListReqReplyItem struct {
-	Food        string  `json:"token"   label:"食物名称"`
-	Desc        string  `json:"userId"  label:"描述"`
+	Food        string  `json:"food"   label:"食物名称"`
+	Desc        string  `json:"desc"  label:"描述"`
 	NearbyPrice float64 `json:"nearby_price" label:"附近的价格"`
 	Image       string  `json:"image"   label:"图片"`
 }
