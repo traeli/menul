@@ -2,13 +2,10 @@ package logic
 
 import (
 	"context"
+	"github.com/zeromicro/go-zero/core/logx"
 	"math/rand"
-	"menul-service/service/api/internal/middleware"
 	"menul-service/service/api/internal/svc"
 	"menul-service/service/api/internal/types"
-	"time"
-
-	"github.com/zeromicro/go-zero/core/logx"
 )
 
 type GetCurrentFoodLogic struct {
@@ -29,14 +26,14 @@ func (l *GetCurrentFoodLogic) GetCurrentFood(req *types.GetCurrentFoodReq) (resp
 	resp = &types.GetCurrentFoodReqReply{}
 	table := l.svcCtx.FoodModel.Food
 
-	timePeriod := middleware.GetTimePeriod(time.Now())
+	//timePeriod := middleware.GetTimePeriod(time.Now())
 
 	// 查询对象初始化
-	query := table.WithContext(l.ctx).Where(table.TimePeriod.Eq(timePeriod))
+	//query := table.WithContext(l.ctx).Where(table.TimePeriod.Eq(timePeriod))
 
 	// 如果有关键词，则按名称模糊查找
 	if req.Food != "" {
-		query = query.Where(table.Name.Like(req.Food))
+		query := table.WithContext(l.ctx).Where(table.Name.Like(req.Food))
 
 		// 尝试查找一个匹配项
 		food, selectErr := query.First()
@@ -54,15 +51,15 @@ func (l *GetCurrentFoodLogic) GetCurrentFood(req *types.GetCurrentFoodReq) (resp
 
 	// 如果关键词为空，则随机查找
 	offset := rand.Intn(10)
-	food, selectErr := query.Offset(offset).Limit(1).First()
+	food, selectErr := table.WithContext(l.ctx).Limit(15).Find()
 	if selectErr != nil {
 		return nil, selectErr
 	}
 
-	resp.Food = food.Name
-	resp.Image = food.Image
-	resp.Desc = food.Desc
-	resp.NearbyPrice = float64(food.Price)
+	resp.Food = food[offset].Name
+	resp.Image = food[offset].Image
+	resp.Desc = food[offset].Desc
+	resp.NearbyPrice = float64(food[offset].Price)
 
 	return resp, nil
 }
