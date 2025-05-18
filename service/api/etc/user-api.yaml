@@ -5,6 +5,6 @@ WxMiniApp:
   AppId: "wx93f56eec335dada8"
   AppSecret: "e9155bbbb96d676321b32d9cc43c29e7"
 Postgres:
-  DataSource: "postgres://directus:directus@localhost:5432/directus?sslmode=disable"
+  DataSource: "postgres://directus:directus@175.178.232.225:5432/directus?sslmode=disable"
 RedisCache:
   Host: 127.0.0.1:6379  # 或 "redis"（如果是 Docker 容器名）

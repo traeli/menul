@@ -51,7 +51,7 @@ func (l *GetCurrentFoodLogic) GetCurrentFood(req *types.GetCurrentFoodReq) (resp
 
 	// 如果关键词为空，则随机查找
 	offset := rand.Intn(10)
-	food, selectErr := table.WithContext(l.ctx).Limit(15).Find()
+	food, selectErr := table.WithContext(l.ctx).Limit(10).Find()
 	if selectErr != nil {
 		return nil, selectErr
 	}
