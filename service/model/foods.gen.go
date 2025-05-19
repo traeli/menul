@@ -12,15 +12,17 @@ const TableNameFood = "foods"
 
 // Food mapped from table <foods>
 type Food struct {
-	ID         string    `gorm:"column:id;primaryKey" json:"id"`
-	CreateAt   time.Time `gorm:"column:create_at" json:"create_at"`
-	UpdateAt   time.Time `gorm:"column:update_at" json:"update_at"`
-	Name       string    `gorm:"column:name" json:"name"`
-	Desc       string    `gorm:"column:desc" json:"desc"`
-	Category   string    `gorm:"column:category" json:"category"`
-	TimePeriod string    `gorm:"column:time_period;default:NULL" json:"time_period"`
-	Image      string    `gorm:"column:image" json:"image"`
-	Price      float32   `gorm:"column:price" json:"price"`
+	ID          string    `gorm:"column:id;primaryKey" json:"id"`
+	Name        string    `gorm:"column:name" json:"name"`
+	Category    string    `gorm:"column:category" json:"category"`
+	Desc        string    `gorm:"column:desc" json:"desc"`
+	CreateAt    time.Time `gorm:"column:create_at" json:"create_at"`
+	UpdateAt    time.Time `gorm:"column:update_at" json:"update_at"`
+	TimePeriod  string    `gorm:"column:time_period" json:"time_period"`
+	Image       string    `gorm:"column:image" json:"image"`
+	Price       float32   `gorm:"column:price" json:"price"`
+	ImageFile   string    `gorm:"column:image_file" json:"image_file"`
+	LikingLevel int32     `gorm:"column:liking_level" json:"liking_level"`
 }
 
 // TableName Food's table name

@@ -8,7 +8,7 @@ import (
 
 func main() {
 	// 连接数据库
-	db, err := gorm.Open(postgres.Open("host=127.0.0.1 user=directus password=directus dbname=directus port=5432 sslmode=disable TimeZone=Asia/Shanghai"), &gorm.Config{})
+	db, err := gorm.Open(postgres.Open("host=175.178.232.225 user=directus password=directus dbname=directus port=5432 sslmode=disable TimeZone=Asia/Shanghai"), &gorm.Config{})
 	if err != nil {
 		panic("failed to connect database: " + err.Error())
 	}

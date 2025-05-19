@@ -28,14 +28,16 @@ func newFood(db *gorm.DB, opts ...gen.DOOption) food {
 	tableName := _food.foodDo.TableName()
 	_food.ALL = field.NewAsterisk(tableName)
 	_food.ID = field.NewString(tableName, "id")
+	_food.Name = field.NewString(tableName, "name")
+	_food.Category = field.NewString(tableName, "category")
+	_food.Desc = field.NewString(tableName, "desc")
 	_food.CreateAt = field.NewTime(tableName, "create_at")
 	_food.UpdateAt = field.NewTime(tableName, "update_at")
-	_food.Name = field.NewString(tableName, "name")
-	_food.Desc = field.NewString(tableName, "desc")
-	_food.Category = field.NewString(tableName, "category")
 	_food.TimePeriod = field.NewString(tableName, "time_period")
 	_food.Image = field.NewString(tableName, "image")
 	_food.Price = field.NewFloat32(tableName, "price")
+	_food.ImageFile = field.NewString(tableName, "image_file")
+	_food.LikingLevel = field.NewInt32(tableName, "liking_level")
 
 	_food.fillFieldMap()
 
@@ -45,16 +47,18 @@ func newFood(db *gorm.DB, opts ...gen.DOOption) food {
 type food struct {
 	foodDo foodDo
 
-	ALL        field.Asterisk
-	ID         field.String
-	CreateAt   field.Time
-	UpdateAt   field.Time
-	Name       field.String
-	Desc       field.String
-	Category   field.String
-	TimePeriod field.String
-	Image      field.String
-	Price      field.Float32
+	ALL         field.Asterisk
+	ID          field.String
+	Name        field.String
+	Category    field.String
+	Desc        field.String
+	CreateAt    field.Time
+	UpdateAt    field.Time
+	TimePeriod  field.String
+	Image       field.String
+	Price       field.Float32
+	ImageFile   field.String
+	LikingLevel field.Int32
 
 	fieldMap map[string]field.Expr
 }
@@ -72,14 +76,16 @@ func (f food) As(alias string) *food {
 func (f *food) updateTableName(table string) *food {
 	f.ALL = field.NewAsterisk(table)
 	f.ID = field.NewString(table, "id")
+	f.Name = field.NewString(table, "name")
+	f.Category = field.NewString(table, "category")
+	f.Desc = field.NewString(table, "desc")
 	f.CreateAt = field.NewTime(table, "create_at")
 	f.UpdateAt = field.NewTime(table, "update_at")
-	f.Name = field.NewString(table, "name")
-	f.Desc = field.NewString(table, "desc")
-	f.Category = field.NewString(table, "category")
 	f.TimePeriod = field.NewString(table, "time_period")
 	f.Image = field.NewString(table, "image")
 	f.Price = field.NewFloat32(table, "price")
+	f.ImageFile = field.NewString(table, "image_file")
+	f.LikingLevel = field.NewInt32(table, "liking_level")
 
 	f.fillFieldMap()
 
@@ -104,16 +110,18 @@ func (f *food) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
 }
 
 func (f *food) fillFieldMap() {
-	f.fieldMap = make(map[string]field.Expr, 9)
+	f.fieldMap = make(map[string]field.Expr, 11)
 	f.fieldMap["id"] = f.ID
+	f.fieldMap["name"] = f.Name
+	f.fieldMap["category"] = f.Category
+	f.fieldMap["desc"] = f.Desc
 	f.fieldMap["create_at"] = f.CreateAt
 	f.fieldMap["update_at"] = f.UpdateAt
-	f.fieldMap["name"] = f.Name
-	f.fieldMap["desc"] = f.Desc
-	f.fieldMap["category"] = f.Category
 	f.fieldMap["time_period"] = f.TimePeriod
 	f.fieldMap["image"] = f.Image
 	f.fieldMap["price"] = f.Price
+	f.fieldMap["image_file"] = f.ImageFile
+	f.fieldMap["liking_level"] = f.LikingLevel
 }
 
 func (f food) clone(db *gorm.DB) food {
