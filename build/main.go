@@ -24,8 +24,10 @@ func main() {
 
 	user := g.GenerateModel("user")
 	foods := g.GenerateModel("foods")
+	orders := g.GenerateModel("orders")
+	orderItem := g.GenerateModel("order_item")
 
-	g.ApplyBasic(user, foods)
+	g.ApplyBasic(user, foods, orders, orderItem)
 
 	// 执行生成
 	g.Execute()

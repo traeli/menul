@@ -4,8 +4,6 @@
 package handler
 
 import (
-	_ "menul-service/service/api/internal/middleware"
-	//"menul-service/service/api/internal/middleware"
 	"net/http"
 
 	"menul-service/service/api/internal/svc"
@@ -14,31 +12,53 @@ import (
 )
 
 func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
-	// 公开路由（不需要鉴权）
-	server.AddRoutes([]rest.Route{
-		{
-			Method:  http.MethodPost,
-			Path:    "/api/user/wxLogin",
-			Handler: wxLoginHandler(serverCtx), // 不加中间件
+	server.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodPost,
+				Path:    "/api/currnt/food",
+				Handler: GetCurrentFoodHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/api/food/list",
+				Handler: GetFoodListHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/api/user/editUser",
+				Handler: editUserHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/api/user/wxLogin",
+				Handler: wxLoginHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/api/order/create",
+				Handler: CreateOrderHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/api/order/delete",
+				Handler: DeleteOrderHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/api/order/detail/:id",
+				Handler: GetOrderHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/api/order/list",
+				Handler: ListOrderHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/api/order/update",
+				Handler: UpdateOrderHandler(serverCtx),
+			},
 		},
-	})
-	server.AddRoutes([]rest.Route{
-		{
-			Method:  http.MethodPost,
-			Path:    "/api/food/list",
-			Handler: GetFoodListHandler(serverCtx),
-		},
-	})
-
-	// 私有路由（需要鉴权）
-	server.AddRoutes([]rest.Route{
-		{
-			Method:  http.MethodPost,
-			Path:    "/api/current/food",
-			Handler: GetCurrentFoodHandler(serverCtx),
-			//Handler: middleware.Auth()( // <- 手动包裹 handler
-			//	GetCurrentFoodHandler(serverCtx),
-			//),
-		},
-	})
+	)
 }

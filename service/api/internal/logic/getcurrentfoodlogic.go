@@ -57,7 +57,7 @@ func (l *GetCurrentFoodLogic) GetCurrentFood(req *types.GetCurrentFoodReq) (resp
 	}
 
 	resp.Food = food[offset].Name
-	resp.Image = food[offset].Image
+	resp.Image = "http://175.178.232.225:8055/assets/" + food[offset].ImageFile
 	resp.Desc = food[offset].Desc
 	resp.NearbyPrice = float64(food[offset].Price)
 

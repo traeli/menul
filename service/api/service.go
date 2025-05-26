@@ -3,9 +3,10 @@ package main
 import (
 	"flag"
 	"fmt"
+	"menul-service/service/api/internal/handler"
 
 	"menul-service/service/api/internal/config"
-	"menul-service/service/api/internal/handler"
+
 	"menul-service/service/api/internal/svc"
 
 	"github.com/zeromicro/go-zero/core/conf"

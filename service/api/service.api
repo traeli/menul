@@ -3,6 +3,7 @@ syntax = "v1"
 import (
 	"doc/user.api"
 	"doc/menu.api"
+	"doc/order.api"
 )
 
 info (
@@ -20,9 +21,28 @@ service user-api {
 	post /api/user/editUser (EditUserReq) returns (EditUserReply)
 
 	@handler GetCurrentFood
-	get /api/currnt/food (GetCurrentFoodReq) returns (GetCurrentFoodReqReply)
+	post /api/currnt/food (GetCurrentFoodReq) returns (GetCurrentFoodReqReply)
 
 	@handler GetFoodList
 	get /api/food/list (GetFoodListReq) returns (GetFoodListReqReply)
+
+	// 创建订单
+	@handler CreateOrder
+	post /order/create (OrderReq) returns (OrderReply)
+
+	// 获取订单详情
+	@handler GetOrder
+	get /order/detail/:id returns (OrderDetailReply)
+
+	@handler UpdateOrder
+	post /order/update (OrderUpdateReq) returns (OrderReply)
+
+	// 删除订单
+	@handler DeleteOrder
+	post /order/delete (OrderDeleteReq) returns (OrderReply)
+
+	// 获取订单列表（后期可加分页参数）
+	@handler ListOrder
+	get /order/list returns (OrderListReply)
 }
 

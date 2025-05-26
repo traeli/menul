@@ -11,11 +11,12 @@ import (
 )
 
 type ServiceContext struct {
-	Config    config.Config
-	UserModel *dao.Query    // UserModel 是数据库模型
-	FoodModel *dao.Query    // FoodModel
-	DBEngin   *gorm.DB      // GORM 数据库连接
-	Redis     *redis.Client //redis
+	Config     config.Config
+	UserModel  *dao.Query // UserModel 是数据库模型
+	FoodModel  *dao.Query // FoodModel
+	OrderModel *dao.Query
+	DBEngin    *gorm.DB      // GORM 数据库连接
+	Redis      *redis.Client //redis
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {

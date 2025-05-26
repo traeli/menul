@@ -1,0 +1,48 @@
+syntax = "v1"
+
+info (
+    title:   "小程序订单接口"
+    desc:    "微信小程序order"
+    author:  "trae"
+    email:   "trae.li"
+    version: "v1"
+)
+
+type (
+    OrderReq {
+        Foods []string `json:"foods" label:"食物"`
+        Remark string  `json:"remark,omitempty" label:"备注"`
+        Table  string  `json:"table,omitempty" label:"桌号"`
+    }
+
+    OrderReply {
+        OrderID string `json:"order" label:"order_id"`
+    }
+
+    OrderDetailReply {
+        OrderID string   `json:"order_id" label:"订单ID"`
+        Foods   []string `json:"foods" label:"食物"`
+        Remark  string   `json:"remark,omitempty" label:"备注"`
+        Table   string   `json:"table,omitempty" label:"桌号"`
+        Status  string   `json:"status" label:"状态"`
+        CreatedAt string `json:"created_at" label:"创建时间"`
+    }
+
+    OrderUpdateReq {
+        OrderID string   `json:"order_id" label:"订单ID"`
+        Foods   []string `json:"foods,omitempty" label:"食物"`
+        Remark  string   `json:"remark,omitempty" label:"备注"`
+        Table   string   `json:"table,omitempty" label:"桌号"`
+        Status  string   `json:"status,omitempty" label:"状态"`
+    }
+
+    OrderDeleteReq {
+        OrderID string `json:"order_id" label:"订单ID"`
+    }
+
+    OrderListReply {
+        Orders []OrderDetailReply `json:"orders"`
+    }
+)
+
+

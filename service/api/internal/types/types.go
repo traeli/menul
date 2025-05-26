@@ -14,7 +14,7 @@ type EditUserReq struct {
 }
 
 type GetCurrentFoodReq struct {
-	Food string `json:"food"   label:"食物名称"`
+	Food string `json:"food"`
 }
 
 type GetCurrentFoodReqReply struct {
@@ -40,6 +40,41 @@ type GetFoodListReqReplyItem struct {
 	Desc        string  `json:"desc"  label:"描述"`
 	NearbyPrice float64 `json:"nearby_price" label:"附近的价格"`
 	Image       string  `json:"image"   label:"图片"`
+}
+
+type OrderDeleteReq struct {
+	OrderID string `json:"order_id" label:"订单ID"`
+}
+
+type OrderDetailReply struct {
+	OrderID   string   `json:"order_id" label:"订单ID"`
+	Foods     []string `json:"foods" label:"食物"`
+	Remark    string   `json:"remark,omitempty" label:"备注"`
+	Table     string   `json:"table,omitempty" label:"桌号"`
+	Status    string   `json:"status" label:"状态"`
+	CreatedAt string   `json:"created_at" label:"创建时间"`
+}
+
+type OrderListReply struct {
+	Orders []OrderDetailReply `json:"orders"`
+}
+
+type OrderReply struct {
+	OrderID string `json:"order" label:"order_id"`
+}
+
+type OrderReq struct {
+	Foods  []string `json:"foods" label:"食物"`
+	Remark string   `json:"remark,omitempty" label:"备注"`
+	Table  string   `json:"table,omitempty" label:"桌号"`
+}
+
+type OrderUpdateReq struct {
+	OrderID string   `json:"order_id" label:"订单ID"`
+	Foods   []string `json:"foods,omitempty" label:"食物"`
+	Remark  string   `json:"remark,omitempty" label:"备注"`
+	Table   string   `json:"table,omitempty" label:"桌号"`
+	Status  string   `json:"status,omitempty" label:"状态"`
 }
 
 type WxLoginReply struct {
