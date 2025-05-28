@@ -35,6 +35,11 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: wxLoginHandler(serverCtx),
 			},
 			{
+				Method:  http.MethodGet,
+				Path:    "/foodCategory/list",
+				Handler: GetFoodCategoryListHandler(serverCtx),
+			},
+			{
 				Method:  http.MethodPost,
 				Path:    "/order/create",
 				Handler: CreateOrderHandler(serverCtx),

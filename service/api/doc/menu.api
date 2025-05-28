@@ -40,3 +40,15 @@ type (
         Image       string  `json:"image"   label:"图片"`
     }
 )
+
+type (
+    GetFoodCategoryListReq {
+    }
+    GetFoodCategoryListReply {
+        Item []GetFoodCategoryListReplyItem
+    }
+    GetFoodCategoryListReplyItem {
+        CategoryID  string  `json:"category_id"     label:"category_id"`
+        Name        string  `json:"food"   label:"食物名称"`
+    }
+)

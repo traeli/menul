@@ -24,6 +24,18 @@ type GetCurrentFoodReqReply struct {
 	Image       string  `json:"image"   label:"图片"`
 }
 
+type GetFoodCategoryListReply struct {
+	Item []GetFoodCategoryListReplyItem
+}
+
+type GetFoodCategoryListReplyItem struct {
+	CategoryID string `json:"category_id"     label:"category_id"`
+	Name       string `json:"food"   label:"食物名称"`
+}
+
+type GetFoodCategoryListReq struct {
+}
+
 type GetFoodListReq struct {
 	Page     int64  // 分页页码
 	PageSize int64  // 每页数量

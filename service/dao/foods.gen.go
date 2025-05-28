@@ -365,3 +365,17 @@ func (f *foodDo) withDO(do gen.Dao) *foodDo {
 	f.DO = *do.(*gen.DO)
 	return f
 }
+func (f food) GetFoodCategoryList() ([]string, error) {
+	var categories []string
+
+	err := f.
+		WithContext(context.TODO()).
+		Select(f.Category).
+		Distinct().
+		Pluck(f.Category, &categories)
+
+	if err != nil {
+		return nil, err
+	}
+	return categories, nil
+}

@@ -44,5 +44,9 @@ service user-api {
 	// 获取订单列表（后期可加分页参数）
 	@handler ListOrder
 	get /order/list returns (OrderListReply)
+
+	//  获取食物种类
+	@handler GetFoodCategoryList
+	get /foodCategory/list returns (GetFoodCategoryListReply)
 }
 
