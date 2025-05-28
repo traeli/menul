@@ -29,8 +29,8 @@ type GetFoodCategoryListReply struct {
 }
 
 type GetFoodCategoryListReplyItem struct {
-	CategoryID string `json:"category_id"     label:"category_id"`
-	Name       string `json:"food"   label:"食物名称"`
+	Category string `json:"category"     label:"category"`
+	Name     string `json:"food"   label:"食物名称"`
 }
 
 type GetFoodCategoryListReq struct {

@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"menul-service/service/api/internal/moudle"
 
 	"menul-service/service/api/internal/svc"
 	"menul-service/service/api/internal/types"
@@ -35,7 +36,8 @@ func (l *GetFoodCategoryListLogic) GetFoodCategoryList() (resp *types.GetFoodCat
 
 	for _, item := range list {
 		resp.Item = append(resp.Item, types.GetFoodCategoryListReplyItem{
-			Name: item,
+			Name:     moudle.TranslateFoodCategory(item),
+			Category: item,
 		})
 	}
 
